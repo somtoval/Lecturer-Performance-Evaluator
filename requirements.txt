@@ -7,3 +7,4 @@ django-cors-headers>=4.0
 whitenoise
 django-cors-headers
 gunicorn
+django-filter
