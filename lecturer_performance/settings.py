@@ -138,3 +138,5 @@ CORS_ALLOW_HEADERS = [
     'authorization',
     # Add other headers if needed
 ]
+
+CSRF_TRUSTED_ORIGINS= [""]
