@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 """
 
 from pathlib import Path
+import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -43,10 +44,12 @@ INSTALLED_APPS = [
     "rest_framework_simplejwt",
     'rest_framework_simplejwt.token_blacklist',
     'corsheaders',
+    'django_filters',
 ]
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
+    "whitenoise.middleware.WhiteNoiseMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
     'corsheaders.middleware.CorsMiddleware',
@@ -122,7 +125,22 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.1/howto/static-files/
 
-STATIC_URL = "static/"
+# The URL to use when referring to static files (e.g., in a web browser)
+STATIC_URL = '/static/'
+
+# Additional directories where static files are located (e.g., the 'static' folder in your app)
+STATICFILES_DIRS = [
+    BASE_DIR / "static",  # or an absolute path like '/path/to/static/'
+]
+
+# The directory where static files will be collected (used in production)
+STATIC_ROOT = BASE_DIR / "staticfiles"  # This is where `collectstatic` will place files
+
+# For user-uploaded files (e.g., images, PDFs), you'll typically use the MEDIA_URL and MEDIA_ROOT settings.
+# User-uploaded files are files uploaded by users (either through the API, admin panel, or a form) for storage.
+# The base directory for media files (e.g., uploaded user images, PDFs, etc.)
+MEDIA_URL = '/media/'  # This will be used to access media files in the browser
+MEDIA_ROOT = BASE_DIR / 'media/'  # The actual location of your media files on the server
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
@@ -138,5 +156,3 @@ CORS_ALLOW_HEADERS = [
     'authorization',
     # Add other headers if needed
 ]
-
-CSRF_TRUSTED_ORIGINS= [""]
