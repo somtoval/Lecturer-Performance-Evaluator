@@ -10,8 +10,6 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.1/ref/settings/
 """
 
-# from ..lecturer_app import custom_middleware
-
 from pathlib import Path
 import os
 
@@ -28,7 +26,7 @@ SECRET_KEY = "django-insecure-ct3rk9g9p!r=#=mwm-fh#d$q-*nf&^pxgg2(di(6l7yj&i740i
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['*', '.railway.app']
+ALLOWED_HOSTS = ['127.0.0.1', '.up.railway.app', '*']
 
 
 # Application definition
@@ -50,7 +48,6 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
-    "lecturer_app.custom_middleware.RailwayCorsFix",
     "django.middleware.security.SecurityMiddleware",
     "whitenoise.middleware.WhiteNoiseMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
@@ -150,9 +147,10 @@ MEDIA_ROOT = BASE_DIR / 'media/'  # The actual location of your media files on t
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
-
-
-
 CORS_ALLOW_ALL_ORIGINS = True
-CORS_ORIGIN_ALLOW_ALL = True
-CORS_ALLOW_CREDENTIALS = True
+
+CORS_ALLOW_HEADERS = [
+    'content-type',
+    'authorization',
+    # Add other headers if needed
+]
